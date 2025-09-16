@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Düğün.com Dijital Partner Sertifika Programı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #db0962;
+            --secondary-color: #00abaa;
+            --dark-color: #2c2c2c;
+            --text-color: #555;
+            --light-color: #f9fafb;
+            --white-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--white-color);
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .main-header {
+            background: var(--white-color);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        .main-header .logo {
+            width: 180px;
+        }
+        .main-nav {
+            display: flex;
+        }
+        .main-nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger-menu {
+            display: none; /* Hide by default on larger screens */
+            font-size: 28px;
+            color: var(--dark-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Nav Overlay */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-nav-overlay.active {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Nav Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden by default */
+            width: 280px;
+            height: 100%;
+            background-color: var(--white-color);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            transition: right 0.3s ease;
+        }
+        .mobile-nav.active {
+            right: 0; /* Slide in */
+        }
+        .mobile-nav a {
+            padding: 15px 30px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s ease;
+        }
+        .mobile-nav a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+        .mobile-nav .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            padding: 30px 5%;
+            background: var(--light-color);
+            gap: 20px;
+        }
+        .hero-text {
+            flex-basis: 65%;
+        }
+        .hero-text h1 {
+            font-size: 3em;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        .hero-text .subtitle {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .hero-visual {
+            flex-basis: 50%;
+        }
+        .hero-visual img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(219, 9, 98, 0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(219, 9, 98, 0.4);
+        }
+
+        /* --- GENEL BÖLÜM STİLLERİ --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--dark-color);
+        }
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* --- NE İŞE YARAR BÖLÜMÜ (İKONLU KARTLAR) --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: var(--white-color);
+            padding: 30px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .feature-card .icon { margin-bottom: 20px; }
+        .feature-card .icon img { height: 60px; }
+        .feature-card h3 { font-size: 1.4em; }
+
+        /* --- SERTİFİKA GÖRSEL BÖLÜMÜ --- */
+        .certificate-showcase { text-align: center; }
+        .certificate-showcase img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        .certificate-showcase img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* --- 3 ADIM BÖLÜMÜ (YENİ TASARIM) --- */
+        .steps-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .step-card {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid #ddd;
+            transition: var(--transition);
+        }
+        .step-header {
+            background-color: var(--white-color);
+            color: var(--dark-color);
+            padding: 20px 30px;
+            font-size: 1.5em;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+         .step-header::before {
+            content: '\f054'; /* Font Awesome chevron-right icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 30px;
+            font-size: 0.8em;
+            transform: rotate(90deg);
+            transition: var(--transition);
+         }
+        .step-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            background-color: var(--white-color);
+            padding: 0 30px;
+        }
+        .step-card.active .step-header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+         .step-card.active .step-header::before {
+             transform: rotate(-90deg);
+         }
+        .step-card.active .step-content {
+            max-height: 200px; /* İçeriğe göre ayarlanabilir */
+            padding: 30px;
+        }
+
+        /* --- VİDEO SLIDER --- */
+        .video-slider-wrapper {
+            position: relative;
+            margin: 0 auto;
+            max-width: 100%; 
+        }
+        .video-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: hidden; /* Hide scrollbar */
+            scroll-behavior: smooth;
+            padding: 20px 0;
+        }
+        .video-thumbnail {
+            flex: 0 0 30%; /* Kart genişliği */
+            scroll-snap-align: center;
+            position: relative;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        .video-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .video-thumbnail img { width: 100%; display: block; }
+        .video-thumbnail .play-icon {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); font-size: 50px;
+            color: rgba(255, 255, 255, 0.9); transition: var(--transition);
+        }
+        .video-thumbnail:hover .play-icon { transform: translate(-50%, -50%) scale(1.2); }
+        .video-thumbnail p {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            margin: 0; padding: 10px; background: rgba(0,0,0,0.5);
+            color: var(--white-color); text-align: center;
+            font-size: 0.9em;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--dark-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .slider-nav:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        #prevBtn { left: -25px; }
+        #nextBtn { right: -25px; }
+        
+        .button-wrapper {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* --- GERİ SAYIM & SINAV KARTI --- */
+        .exam-card {
+            display: flex;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            gap: 40px;
+            padding: 40px;
+        }
+        .countdown-section {
+            flex-basis: 40%;
+            text-align: center;
+        }
+        .countdown-section h3 {
+            font-size: 1.8em;
+            color: var(--dark-color);
+        }
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .time-block {
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 70px;
+        }
+        .time-block span {
+            display: block;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .time-block small {
+            font-size: 0.8em;
+        }
+        .exam-rules {
+            flex-basis: 60%;
+        }
+        .exam-rules h3 { text-align: left; }
+        .rules-list { list-style: none; padding: 0; }
+        .rules-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .rules-list li img {
+            height: 24px;
+            margin-right: 15px;
+        }
+        
+        /* --- FOOTER --- */
+        .main-footer {
+            background: var(--dark-color);
+            color: #ccc;
+            padding: 40px 5%;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 20px; /* Space between items when wrapped */
+        }
+        .footer-content .logo { width: 180px; }
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .footer-socials a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: var(--transition);
+        }
+        .footer-socials a:hover { color: var(--primary-color); }
+        .footer-content .cta-button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        /* --- DİĞER --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: flex; align-items: center;
+            justify-content: center; z-index: 999; opacity: 0; visibility: hidden;
+            transition: var(--transition);
+        }
+        .modal.active { opacity: 1; visibility: visible; }
+        .modal-content-video { position: relative; width: 90%; max-width: 900px; }
+        .modal-video { position: relative; padding-bottom: 56.25%; height: 0; }
+        .modal-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .close-modal {
+            position: absolute; top: -40px; right: 0; font-size: 30px;
+            color: var(--white-color); cursor: pointer;
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 992px) {
+            .video-thumbnail { flex: 0 0 45%; }
+            #prevBtn { left: -15px; }
+            #nextBtn { right: -15px; }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav { display: none; } /* Hide desktop nav */
+            .hamburger-menu { display: block; } /* Show hamburger menu */
+
+            .hero-section { flex-direction: column-reverse; text-align: center; padding: 20px 5%; }
+            .hero-text { flex-basis: 100%; }
+            .hero-text h1 { font-size: 2.2em; }
+            .hero-text .subtitle { font-size: 1em; }
+            .hero-visual { flex-basis: 100%; }
+            .video-slider {
+    overflow-x: auto; /* Yatay kaydırmayı aktif eder */
+    scroll-snap-type: x mandatory; /* Kaydırma sonrası videolara kenetlenmeyi sağlar */
+}
+            h2 { font-size: 1.8em; margin-bottom: 40px; }
+
+            .exam-card { flex-direction: column; padding: 20px; gap: 20px; }
+            .countdown-section, .exam-rules { flex-basis: 100%; }
+            .countdown-section h3 { font-size: 1.5em; }
+            #countdown {
+                flex-wrap: wrap; /* Allow time blocks to wrap */
+                justify-content: center;
+                gap: 10px; /* Adjust gap for smaller screens */
+            }
+            .time-block {
+                padding: 10px;
+                min-width: 60px;
+            }
+            .time-block span {
+                font-size: 1.8em; /* Smaller font for numbers */
+            }
+            .time-block small {
+                font-size: 0.7em;
+            }
+
+            .rules-list li { font-size: 1em; margin-bottom: 10px; }
+            .rules-list li img { height: 20px; margin-right: 10px; }
+
+            .video-thumbnail { flex: 0 0 80%; }
+            #prevBtn, #nextBtn { display: none; } /* Hide slider arrows on very small screens if desired */
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-socials {
+                justify-content: center;
+                gap: 15px;
+            }
+            .footer-content .cta-button {
+                width: 100%;
+                max-width: 200px;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.8em; }
+            .cta-button { padding: 12px 25px; font-size: 16px; }
+            h2 { font-size: 1.5em; }
+            .feature-card { padding: 20px; }
+            .feature-card h3 { font-size: 1.2em; }
+            .step-header { font-size: 1.2em; padding: 15px 20px; }
+            .step-header::before { right: 20px; }
+            .step-card.active .step-content { padding: 20px; }
+            .video-thumbnail { flex: 0 0 95%; } /* Almost full width */
+            .countdown-section h3 { font-size: 1.2em; }
+            .time-block { padding: 8px; min-width: 50px; }
+            .time-block span { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <a href="">
+    	<img class="logo" src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo">
+	</a>
+        <nav class="main-nav" id="desktopNav">
+            <a href="#ne-ise-yarar">Sertifika Ne İşe Yarar?</a>
+            <a href="#nasil-alinir">Nasıl Alınır?</a>
+            <a href="#egitimler">Eğitimler</a>
+            <a href="#sinav">Sınava Katıl</a>
+        </nav>
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="close-btn" id="closeMobileNav"><i class="fas fa-times"></i></div>
+        <a href="#ne-ise-yarar">Sertifika Ne İşe Yarar?</a>
+        <a href="#nasil-alinir">Nasıl Alınır?</a>
+        <a href="#egitimler">Eğitimler</a>
+        <a href="#sinav">Sınava Katıl</a>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1>Düğün.com Dijital Partner Sertifika Programı</h1>
+                <p class="subtitle">Düğün profesyonelleri, artık <strong>Düğün.com Dijital Partner Sertifika Programı</strong> ile sektör ve dijital dünyadaki deneyimlerini belgeleme fırsatı yakalıyor. Siz de programa katılın, başarılarınızı belgeleyin!</p>
+                <a href="#sinav" class="cta-button">Hemen Sınava Katıl</a>
+            </div>
+            <div class="hero-visual">
+               <img src="https://i.dugun.com/articles/body/isortagim-kapak.jpg" alt="Başarıyı kutlayan profesyoneller">
+            </div>
+        </section>
+
+        <div class="container" id="ne-ise-yarar">
+            <h2>Neden Düğün.com Dijital Partner Sertifikası?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                   <div class="icon"><img src="https://img.icons8.com/ios-filled/100/db0962/trophy.png" alt="Rekabet İkonu"/></div>
+                    <h3>Rekabette Fark Yaratın</h3>
+                    <p>Düğün.com’un prestijli "Dijital Partner" programıyla farkınızı ortaya koyun, rakiplerinizden ayrışın."</p>
+		</div>
+                <div class="feature-card">
+                    <div class="icon"><img src="https://img.icons8.com/ios-filled/100/db0962/guarantee.png" alt="Güven İkonu"/></div>
+                     <h3>Güveni Güçlendirin </h3>
+                     <p>Çiftlerin size olan güvenini, ilk andan itibaren artırın. Bunun için sertifikanızı ofisinizin en görünür yerinde sergilemeyi unutmayın!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><img src="https://img.icons8.com/ios-filled/100/db0962/linkedin.png" alt="Dijital Varlık İkonu"/></div>
+                    <h3>Dijitalde Öne Çıkın</h3>
+                    <p>Sertifikanızı LinkedIn ve diğer sosyal medya kanallarında gururla paylaşarak, sektördeki profesyonel imajınızı güçlendirin.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--light-color);">
+            <div class="container">
+                <h2>Nasıl Bir Sertifika Sizi Bekliyor?</h2>
+                <div class="certificate-showcase">
+                    <a href="https://github.com/nesibekeles/sertifika/blob/main/s%C4%B1nav%20davet%20mailing%20banner.jpg?raw=true" target="_blank">
+                        <img src="https://github.com/nesibekeles/sertifika/blob/main/s%C4%B1nav%20davet%20mailing%20banner.jpg?raw=true" alt="Düğün.com Dijital Partner Sertifikası">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="nasil-alinir">
+            <h2>Sertifikaya Giden 3 Basit Adım</h2>
+            <div class="steps-container">
+                <div class="step-card active">
+                    <div class="step-header" onclick="toggleStep(this)">1. KATIL</div>
+                    <div class="step-content">
+                        <p>Düğün sektörü profesyonelleri için hazırladığımız 5’er dakikalık videolarla, dijital dünyada sizi öne çıkaracak bilgilere ulaşın.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleStep(this)">2. BAŞAR</div>
+                    <div class="step-content">
+                        <p>Videoların ardından, 12 soruluk yetkinlik sınavına katılarak Düğün.com paneline olan hakimiyetinizi gösterin.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleStep(this)">3. BELGELE</div>
+                    <div class="step-content">
+                        <p>Sınavı başarıyla tamamlayarak isminize özel hazırlanan "Düğün.com Dijital Partner Sertifikası" almaya hak kazanın!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="egitimler" style="background: var(--light-color);">
+            <div class="container">
+                <h2>Eğitim Videoları</h2>
+                <p style="text-align:center;">Sınava başlamadan önce aşağıdaki eğitim serisini dikkatle izlemenizi öneririz. Videolar, sınavdaki soruların cevaplarını içermektedir.</p>
+                <div class="video-slider-wrapper">
+                    <div class="video-slider" id="videoSlider">
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=WN8hUhkCJUw&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=1')">
+                            <img src="https://i.ytimg.com/vi/WN8hUhkCJUw/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCIc2C0uJBRR2fvpDzaLTvzjSgeHA" alt="Video 1 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Giriş: Düğün.com'a Hoş Geldiniz!</p>
+                        </div>
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=k2-g2hR9LlE&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=3')">
+                            <img src="https://github.com/nesibekeles/sertifikasinav/blob/main/1.firma%20bilgileri.png?raw=true" alt="Video 1 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Bölüm 1: İşletme Bilgileri</p>
+                        </div>
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=T5AEuSKzQN0&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=6')">
+                            <img src="https://github.com/nesibekeles/sertifikasinav/blob/main/2.galeri%20bilgileri.png?raw=true" alt="Video 2 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Bölüm 2: Galeri Düzenleme</p>
+                        </div>
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=89cgTtVVLkM&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=7')">
+                            <img src="https://github.com/nesibekeles/sertifikasinav/blob/main/3.yorum%20y%C3%B6netimi.png?raw=true" alt="Video 3 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Bölüm 3: Yorum Yönetimi</p>
+                        </div>
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=wLcmhaWLnJw&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=8')">
+                            <img src="https://github.com/nesibekeles/sertifikasinav/blob/main/4.kampanya%20giri%C5%9Fi.png?raw=true" alt="Video 4 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Bölüm 4: Kampanyalar</p>
+                        </div>
+                        <div class="video-thumbnail" onclick="openModal('https://www.youtube.com/watch?v=iC9PbWPVWDk&list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E&index=9')">
+                            <img src="https://github.com/nesibekeles/sertifikasinav/blob/main/5.teklif%20y%C3%B6netimi.png?raw=true" alt="Video 5 Cover">
+                            <div class="play-icon">▶</div>
+                            <p>Bölüm 5: Teklif Yönetimi</p>
+                        </div>
+                    </div>
+                    <button class="slider-nav" id="prevBtn">‹</button>
+                    <button class="slider-nav" id="nextBtn">›</button>
+                </div>
+                <div class="button-wrapper">
+                     <a href="https://www.youtube.com/playlist?list=PLwBs3owE4E5JRp95aClXvisEtO0Iv1a_E" target="_blank" rel="noopener noreferrer" class="cta-button" style="background-color: #555; box-shadow: 0 4px 15px rgba(0,0,0, 0.2);">Tüm Seriyi YouTube'da Görüntüle</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="sinav">
+            <h2>Sınava Katılın</h2>
+            <div class="exam-card">
+                <div class="countdown-section">
+                    <h3>Sınav İçin Kalan Süre</h3>
+                    <div id="countdown">
+                        <div class="time-block"><span>00</span><small>Gün</small></div>
+                        <div class="time-block"><span>00</span><small>Saat</small></div>
+                        <div class="time-block"><span>00</span><small>Dakika</small></div>
+                        <div class="time-block"><span>00</span><small>Saniye</small></div>
+                    </div>
+                    <a href="https://tally.so/r/wLegLO" target="_blank" rel="noopener noreferrer" class="cta-button">SINAVA BAŞLA</a>
+                </div>
+                <div class="exam-rules">
+                    <h3>Sınav Kuralları ve Teknik Bilgiler</h3>
+                    <ul class="rules-list">
+                        <li><img src="https://img.icons8.com/ios/50/000000/test-passed.png" alt="Soru Sayısı İkonu"/> 12 Adet Soru</li>
+                        <li><img src="https://img.icons8.com/ios/50/000000/star--v1.png" alt="Başarı Puanı İkonu"/> Minimum %80 Başarı</li>
+                        <li><img src="https://img.icons8.com/ios/50/000000/time--v1.png" alt="Süre İkonu"/> Tahmini Süre: 15 Dakika</li>
+                        <li><img src="https://img.icons8.com/ios/50/000000/calendar--v1.png" alt="Tarih İkonu"/> Son Katılım: 28 Eylül 2025</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: var(--light-color);">
+            <div class="container">
+                <h2>ÇOK YAKINDA: Dijital Partnerler Yarışıyor!</h2>
+                <p style="text-align:center;">Rakipleriniz arasında öne çıkma ve yeteneklerinizi sergileme fırsatı bulacağınız, performansa dayalı aylık yarışmalar ve ödüller sizi bekliyor. Detaylar için takipte kalın!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <img class="logo" src="https://github.com/nesibekeles/sertifikasinav/blob/main/dugun-com-logo-v1-227x60-white.png?raw=true" alt="Düğün.com Beyaz Logo">
+            <div class="footer-socials">
+                <a href="https://instagram.com/duguncom" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.facebook.com/duguncom" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://www.linkedin.com/company/dugun-com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://dugun.com" target="_blank" rel="noopener noreferrer">Dugun.com</a>
+            </div>
+            <a href="https://panel.dugun.com/" class="cta-button" style="background-color: var(--secondary-color); box-shadow: none;" target="_blank" rel="noopener noreferrer">Panelime Git</a>
+        </div>
+    </footer>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content-video">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <div class="modal-video">
+                <iframe id="videoFrame" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky Header
+            const header = document.getElementById('mainHeader');
+            const sticky = header.offsetTop;
+            window.onscroll = function() {
+                if (window.pageYOffset > sticky) {
+                    header.style.boxShadow = "0 5px 15px rgba(0,0,0,0.1)";
+                } else {
+                    header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.05)";
+                }
+            };
+            
+            // Geri Sayım Sayacı
+            const countDownDate = new Date("Sep 28, 2025 23:59:59").getTime();
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.querySelector("#countdown .time-block:nth-child(1) span").innerHTML = days;
+                document.querySelector("#countdown .time-block:nth-child(2) span").innerHTML = hours;
+                document.querySelector("#countdown .time-block:nth-child(3) span").innerHTML = minutes;
+                document.querySelector("#countdown .time-block:nth-child(4) span").innerHTML = seconds;
+                
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "SINAV SONA ERDİ";
+                }
+            }, 1000);
+
+            // Video Slider Navigation
+            const slider = document.getElementById('videoSlider');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            // Calculate slide width dynamically to account for varying screen sizes
+            function getSlideWidth() {
+                const firstThumbnail = slider.querySelector('.video-thumbnail');
+                if (firstThumbnail) {
+                    // Include gap in width calculation
+                    const style = window.getComputedStyle(slider);
+                    const gap = parseFloat(style.getPropertyValue('gap'));
+                    return firstThumbnail.offsetWidth + gap;
+                }
+                return 0;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                slider.scrollLeft -= getSlideWidth();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                slider.scrollLeft += getSlideWidth();
+            });
+
+            // Mobile Navigation Toggle
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const closeMobileNav = document.getElementById('closeMobileNav');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+            hamburgerMenu.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            function closeNav() {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            closeMobileNav.addEventListener('click', closeNav);
+            mobileNavOverlay.addEventListener('click', closeNav); // Close when clicking outside menu
+
+            // Close mobile nav when a link is clicked
+            const mobileNavLinks = mobileNav.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeNav);
+            });
+        });
+
+        // Adımlara tıklama fonksiyonu
+        function toggleStep(header) {
+            const stepCard = header.parentElement;
+            
+            // Eğer zaten aktifse, kapat. Değilse, aç ve diğerlerini kapat.
+            if (stepCard.classList.contains('active')) {
+                stepCard.classList.remove('active');
+            } else {
+                // İsteğe bağlı: Diğerlerini kapatmak isterseniz bu bölümü aktif edin
+                // const allSteps = document.querySelectorAll('.step-card');
+                // allSteps.forEach(s => s.classList.remove('active'));
+                
+                stepCard.classList.add('active');
+            }
+        }
+        
+        // Video Modal Script'i
+        const modal = document.getElementById('videoModal');
+        const videoFrame = document.getElementById('videoFrame');
+        function openModal(videoId) {
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?`;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            videoFrame.src = ''; // Stop video playback
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
